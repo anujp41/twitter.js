@@ -2,31 +2,24 @@ const express = require('express');
 const app = express(); // creates an instance of an express application
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
+const routes = require('./routes');
 
-var people = {
-        person: [{name: "Bob"},{name:"Sif"},{name:"FSA"}]
-//        location: []
-//        person: {
-//            name: 'sif'
-//        },
-//        person: {
-//            name: 'anuj'
-//        }//
-    };
+app.engine('html', nunjucks.render);
+app.set('view engine', 'html');
+
+const people = [{name: "Bob"},{name:"Sif"},{name:"FSA"}];
+
+//const people: [{name: "Bob"},{name:"Sif"},{name:"FSA"}];
 
 nunjucks.configure('views', {
-    autoescape: true,
-    express: app,
-    watch: true
+    noCache: true
 });
+app.use(morgan('combined'));
+app.use('/', routes);
 
-app.use(morgan('combined'))
 
-app.get('/*', function (req, res) {
-  //res.send('hello, world!')
-    res.render('index.html', {humans: people.person});
-});
+
 
 app.listen(3000, function () {
-    console.log('...starting server');
-})
+    console.log('...started server');
+});
