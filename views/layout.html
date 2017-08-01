@@ -88,18 +88,44 @@
   socket.on('connect', function(){
     console.log('connected to server via WebSockets!');
   });
-    var newTweet = function() {
-        
-    }
-    document.getElementById('submitBtn').addEventListener('click', function() {
-        socket.emit('newTweet');
-    })
+  /*
+    document.getElementById('submitBtn').onclick = function() {
+        console.log('clicked');
+        socket.emit('event', 'list');
+    };
+    */
     
   // When 'new_tweet' events are fired, do something with the packaged tweet
-  socket.on('newTweet', function (tweet) { 
+  socket.on('newTweet', function (tweet) {
     console.log(tweet);
     alert('Refreshing... check the console...');
-    // some logic to add the new tweet to the DOM…
+    // add tweet to the DOM
+      location.reload();
+      //var tweetList = document.getElementById('tweetList');
+
+      //var liNode = document.createElement("LI");                 // Create a <li> node
+      //liNode.className = 'tweetbox';
+
+      // create an image node
+      // create an anchor node
+      // create a paragraph node
+      // create an anchor node
+
+
+      //tweetList.appendChild(liNode);
+/*
+      <li class='tweetbox' style='color: blue'>
+          <img />
+          <a href="/users/{{tweet.name}}">{{tweet.name}}</a>
+      <p>
+      <a href="/tweets/{{tweet.id}}">{{tweet.content}}</a></p>
+      </li>
+      */
+
+      //var textnode = document.createTextNode(tweet.content);         // Create a text node
+
+
+      // some logic to add the new tweet to the DOM…
   }); 
 </script>
 </html>

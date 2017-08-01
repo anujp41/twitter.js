@@ -41,11 +41,12 @@ module.exports = function (io) {
     });
 
     router.post('/tweets', function(req, res) {
-        console.log(req.body);
+        //console.log(req.body);
         var id = tweetBank.list.length + 1;
         var name = req.body.name;
         var text = req.body.text;
         tweetBank.add(id, name, text);
+        io.sockets.emit("newTweet", req.body);
         res.redirect('/');
     })
 
