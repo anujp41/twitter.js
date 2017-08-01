@@ -14,12 +14,28 @@
     <div class="col-md-9">
     
       <!-- display tweets here -->
+        {% if showForm %}
+          <form action="/tweets" method="POST">
+            <label for="name_field">Name:</label>
+              {% if inUsers %}
+              
+               <input name="name" value='{{userName}}' type="text" id="name_field" />
+              {% endif %}
+              
+            <input name="name" type="text" id="name_field" />
+
+            <label for="text_field">Text:</label>
+            <input name="text" type="text" id="text_field" style="width: 350px;" />
+            <input id='submitBtn' type="submit" value="Submit" />
+          </form>
+        {% endif %}
         <ul class='list-group'>
         {% for tweet in tweets %}
         <li class='tweetbox' style='color: blue'>
             <img />
             <a href="/users/{{tweet.name}}">{{tweet.name}}</a>
-            <p>{{tweet.content}}</p>
+            <p>
+                <a href="/tweets/{{tweet.id}}">{{tweet.content}}</a></p>
             </li>
       {% endfor %}
         </ul>
